@@ -18,6 +18,8 @@ env:
   TZ: Asia/Kolkata
   MIR: bit
   EXT: zip
+  sf_pwd: ${{ secrets.SF_PWD }}
+  sf_usr: ${{ secrets.SF_USR }}
 jobs:
   build:
     runs-on: ubuntu-latest
