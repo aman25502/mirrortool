@@ -37,13 +37,19 @@ jobs:
        - name: Initializing environment
          run: |
             sudo -E apt-get -qq update
-            sudo -E apt-get -qq install aria2 curl wget
+            sudo -E apt-get -qq install aria2 curl wget rsync sshpass
        - name: Download time
          run: |
             aria2c $DURL
        - name: Download transfer
          run: |
             curl -sL https://git.io/file-transfer | sh
+       - name: upload to sf
+         run: |
+            wget https://raw.githubusercontent.com/aman25502/scripts/master/mirrorsftp.sh
+            sudo chmod +x mirrorsftp.sh
+            bash mirrorsftp.sh
+            curl -s -X POST https://api.telegram.org/bot1294950340:AAF3nyGc8fOZtZ7wkAneQOkiORWZ_1YW2q8/sendMessage -d text="mirror file is uploaded to sourceforge" -d chat_id=-1001349965943                   
        - name: its upload time
          run: |
             ./transfer $MIR *.$EXT
